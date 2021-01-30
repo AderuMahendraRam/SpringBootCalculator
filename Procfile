@@ -1,1 +1,1 @@
-web: java -jar target/calculator-1.1.jar
+web: java $JAVA_OPTS -jar -Dserver.port=$PORT target/*.jar
