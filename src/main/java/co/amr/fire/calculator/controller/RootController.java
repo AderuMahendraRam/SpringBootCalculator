@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RootController {
 
+    @GetMapping("/")
+    public String root() {
+        String result = "Hello Application is up";
+        return result;
+    }
+
     @GetMapping("/doCalculation/{firstValue}/{secondValue}")
     public String doCalculation(@PathVariable String firstValue, @PathVariable String secondValue) {
         String result = "Please provide proper parameters for calulation";
