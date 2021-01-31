@@ -1,11 +1,17 @@
 package co.amr.fire.calculator.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import co.amr.fire.calculator.bean.CalculatorBean;
+import co.amr.fire.calculator.service.CalculatorService;
 
 @RestController
 public class RootController {
+
+    @Autowired
+    CalculatorService service;
 
     @GetMapping("/")
     public String root() {
@@ -13,18 +19,9 @@ public class RootController {
         return result;
     }
 
-    @GetMapping("/doCalculation/{firstValue}/{secondValue}")
-    public String doCalculation(@PathVariable String firstValue, @PathVariable String secondValue) {
-        String result = "Please provide proper parameters for calulation";
-        if (firstValue != null && secondValue != null) {
-            try {
-                long totalCount = Long.parseLong(firstValue) + Long.parseLong(secondValue);
-                result = String.valueOf(totalCount);
-            } catch (Exception e) {
-                result = "Failed to perform operation";
-            }
-        }
-        return result;
+    @GetMapping("/doCalculation")
+    public String doCalculation(CalculatorBean bean) {
+        return service.doCalculation(bean);
     }
 
 }
